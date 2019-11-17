@@ -69,8 +69,8 @@ vector<vector<mpz_class> > aggregatorProcessor(vector<vector<mpz_class> > OEISLi
   int rightArraySize;
   int bound = 10;
 
-  int leftMax = 10; //should be sequenceCount
-  int rightMax = 10;
+  int leftMax = 1000; //should be sequenceCount
+  int rightMax = 1000;
 
   // Condition is a loop
   while (leftIndex < leftMax) { //While
@@ -145,7 +145,7 @@ int main(int argc, char* argv[]) {
 
         mpz_set_str(holder.get_mpz_t(), token, 10); //attempt to convert
 
-        if (mpz_cmp(prev.get_mpz_t(), holder.get_mpz_t()) < 0) {
+        if (mpz_cmp(prev.get_mpz_t(), holder.get_mpz_t()) > 0) {
 
           addflag = false;
           break;
@@ -171,12 +171,12 @@ int main(int argc, char* argv[]) {
 
   cout << integerSequences.size() << "\n";
   vector<vector<mpz_class> > coincidences = aggregatorProcessor(integerSequences, integerSequences.size());
-
+  // vector<vector<mpz_class> > coincidences = integerSequences;
   int coincidenceSize = coincidences.size();
   int i = 0;
   int j;
   int individualCoincidenceSize;
-  ofstream outputFile ("cprocessedoutput");
+  ofstream outputFile ("processedandworking");
 
   if (outputFile.is_open()) {
 

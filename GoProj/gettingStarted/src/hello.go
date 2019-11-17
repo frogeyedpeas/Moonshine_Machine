@@ -7,6 +7,7 @@ import (
   "os"
   "sync"
   "bufio"
+  "math/big"
 )
 
 
@@ -29,31 +30,46 @@ func fileCreator(fileName string, waitGroup *sync.WaitGroup) {
   w.Flush()
 }
 
-func sharedRead(fileName string) {
+func sharedRead(fileName string, waitGroup *sync.WaitGroup) {
 
+    defer waitGroup.Done()
     f,err := os.Open(fileName)
     check(err)
     defer f.Close()
 
     lineScanner := bufio.NewScanner(f)
-    for line in lineScanner.Scan() {
-      fmt.Println(line)
+    for lineScanner.Scan() {
+      fmt.Println(lineScanner.Text())
     }
+}
+
+func Operate() {
+
+  //reading an integer
+  age := new(big.Int)
+  var ageString string
+  fmt.Println("What is your age?")
+  fmt.Scan(&ageString)
+
+
+  age, ok := age.SetString(ageString, 10)
+
+  if !ok {
+    fmt.Println("OMG something bad happened")
+    return
+  }
+  fmt.Println(age, " is but a number")
+
 }
 
 func main() {
 
-    /* var waitGroup sync.WaitGroup
-    go fileCreator("test", &waitGroup)
-    go fileCreator("best", &waitGroup)
-    go fileCreator("west", &waitGroup)
+    // define a waitGroup WaitGroup and test shared reading
+
+    
+
+
     waitGroup.Add(3)
-    waitGroup.Wait()
-
-    */
-
-
-    sharedRead("testfile")
 
     fmt.Println("Now we commence waiting")
     fmt.Println("Now we are done")
