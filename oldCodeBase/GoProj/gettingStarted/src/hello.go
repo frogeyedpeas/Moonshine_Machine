@@ -66,7 +66,8 @@ func main() {
 
     // define a waitGroup WaitGroup and test shared reading
 
-    
+    // so we pipe in our data 
+
 
 
     waitGroup.Add(3)
