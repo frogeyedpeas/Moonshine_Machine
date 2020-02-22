@@ -30,3 +30,53 @@ def pack_num(target_num, array):
     
     return None
 
+
+#this is condition for checking which things can be packed 
+def can_be_packed(first_array, second_array, bound):
+
+    i = 0
+    while i < bound and i < len(first_array):
+
+        if pack_num(first_array[i], second_array) == None:
+            return False
+
+        i+=1
+
+    return True
+
+#driver code
+if __name__ == '__main__':
+
+    f = open('intSequenceList', 'r')
+
+    intarray = eval(f.read())
+
+    f.close()
+
+
+    positive_hits = []
+
+    i = 0
+    while i < len(intarray):
+
+        j = i +1
+
+        while j < len(intarray):
+
+            if can_be_packed(first_array, second_array, 5):
+                
+                positive_hits.append((i,j))
+
+            j+=1
+
+        i+=1
+
+    g = open('coincidences_detected', 'r')
+
+    g.write(str(positive_hits))
+
+    g.close()
+
+
+
+
