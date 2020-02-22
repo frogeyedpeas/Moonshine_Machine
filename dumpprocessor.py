@@ -1,4 +1,6 @@
 
+growtharray = [1,2,4,8,16,32,64,128]
+growthlength = 7
 
 with open('datadump', 'r') as f:
 
@@ -18,14 +20,20 @@ with open('datadump', 'r') as f:
     
         split_line = nextLine.split()[1] #this grabs just the integer sequence part
         int_string_sequence = split_line.split(',')[1:-1] #we remove the trailing and leading elements to just preserve the actual integer sequence
-
+        
+        rejectFlag = False
         i = 0
         while i < len(int_string_sequence):
-            int_string_sequence[i] = int(int_string_sequence[i]) 
+            int_string_sequence[i] = int(int_string_sequence[i])
+
+            if i <= growthlength:
+                if int_string_sequence[i] < growtharray[i]:
+                    rejectFlag = True
             i+=1
 
-
-        sequenceList.append(int_string_sequence)
+        if not rejectFlag:
+            sequenceList.append(int_string_sequence)
+        
         nextLine = f.readline()
         print(nextLine) # this is for debugging comment out once we prove feasibility
 
