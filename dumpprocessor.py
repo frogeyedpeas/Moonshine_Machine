@@ -29,6 +29,10 @@ with open('datadump', 'r') as f:
             if i <= growthlength:
                 if int_string_sequence[i] < growtharray[i]:
                     rejectFlag = True
+
+            else:
+                if int_string_sequence[i] < int_string_sequence[i-1]:
+                    rejectFlag = True
             i+=1
 
         if not rejectFlag:
