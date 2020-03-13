@@ -9,4 +9,9 @@ So the current plan:
 
 So which sequences are interesting? We probably want to filter them for strictly positive elements, and make sure they are growing at least at a pace of 2^n (a beyond exp-growth condition ensures that packing is "expected" to fail but testing that globally can be hard)
 
+Some architecture notes:
+
+SQL database containing "coincidence text", OEIS IDs and # of upvotes and # of downvotes 
+
+When a user hits the URL they are served up a :wq
 
