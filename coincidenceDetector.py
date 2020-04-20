@@ -2,8 +2,10 @@
 
 #given the int sequence and (in the future) a coincidence library, we can search for certian classes of coincidences
 #for now we are attempting to search for greedy packing coincidences
+#we can add a bound condition, to define what we consider to be "small" linear combinations
+#if something isn't small then it is invalid
 
-def pack_num(target_num, array):
+def pack_num(target_num, array, bound=10):
 
     if target_num == 0: #edge case, empty sums are always summable
         return []
@@ -19,9 +21,12 @@ def pack_num(target_num, array):
     i-=1 #either we went of the array or array[i] is TOO big, so in either case we decrement 
 
     phase = (target_num//array[i])
+
+    if phase > bound:
+        return None
+
     reduced_target = target_num - array[i]*phase
     
-    print(reduced_target)
 
     sub_value = pack_num(reduced_target, array)
     
@@ -32,7 +37,7 @@ def pack_num(target_num, array):
 
 
 #this is condition for checking which things can be packed 
-def can_be_packed(first_array, second_array, bound):
+def can_be_packed(first_array, second_array, bound, pack_bound = 10):
 
     i = 0
     while i < bound and i < len(first_array):
@@ -54,6 +59,8 @@ if __name__ == '__main__':
     f.close()
 
 
+    g = open('coincidences_detected', 'w')
+    
     positive_hits = []
 
     i = 0
@@ -63,17 +70,16 @@ if __name__ == '__main__':
 
         while j < len(intarray):
 
-            if can_be_packed(first_array, second_array, 5):
-                
+            print(i, j) 
+            if can_be_packed(intarray[i],intarray[j], 5):
+                g.write(str((i,j))+'\n')              
                 positive_hits.append((i,j))
 
             j+=1
 
         i+=1
 
-    g = open('coincidences_detected', 'r')
 
-    g.write(str(positive_hits))
 
     g.close()
 
