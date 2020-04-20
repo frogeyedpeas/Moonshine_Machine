@@ -1,0 +1,5 @@
+The pattern is <!-- A###### --!>
+
+#ignoring the first chunk of teh split, every chunk there after gets wrapped in an <a href= > </a> tag 
+
+

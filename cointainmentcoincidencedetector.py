@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     bound = 1000
 
-    coincidencelist = main_process(table_list, bound, 5)
+    coincidencelist = main_process(table_list, bound, 10)
 
     f = open('containmentcoincidencelist', 'w')
     f.write(str(coincidencelist))
